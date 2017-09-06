@@ -26,4 +26,8 @@ public interface NoteDao extends JpaRepository<Note, String> {
     @Query(value = "DELETE from note  where shortid=?1", nativeQuery = true)
     Integer remove(Short shortID);
 
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE from note  where id in ?1", nativeQuery = true)
+    Integer deleteNotes(List<String> ids);
 }

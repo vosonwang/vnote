@@ -3,12 +3,10 @@ package me.voson.vnote.action;
 import me.voson.vnote.dao.NoteDao;
 import me.voson.vnote.entity.Note;
 import me.voson.vnote.service.NoteService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -40,6 +38,12 @@ public class NoteAction {
     @RequestMapping(value="/notes/{shortId}", method = RequestMethod.DELETE)
     public Integer deleteNote(@PathVariable Short shortId){
         return noteDao.remove(shortId);
+    }
+
+    /*批量删除笔记*/
+    @RequestMapping(value="/notes", method = RequestMethod.DELETE)
+    public Integer deleteNotes(@RequestBody ArrayList<String>  notes){
+        return noteDao.deleteNotes(notes);
     }
 
     /**
